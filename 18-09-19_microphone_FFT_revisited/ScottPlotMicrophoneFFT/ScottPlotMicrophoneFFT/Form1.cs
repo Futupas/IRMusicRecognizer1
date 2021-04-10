@@ -186,10 +186,5 @@ namespace ScottPlotMicrophoneFFT
                 fft[i] = fftComplex[i].Magnitude;
             return fft;
         }
-
-        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
     }
 }

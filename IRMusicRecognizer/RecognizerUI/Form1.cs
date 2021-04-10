@@ -22,11 +22,7 @@ namespace RecognizerUI
     {
         // MICROPHONE ANALYSIS SETTINGS
         private int RATE = 44100; // sample rate of the sound card
-        //private int BUFFERSIZE = (int)Math.Pow(2, 11); // must be a multiple of 2
-        private int BUFFERSIZE = (int)Math.Pow(2, 9); // must be a multiple of 2
-
-        // prepare class objects
-        public BufferedWaveProvider bwp;
+        private int BUFFERSIZE = (int)Math.Pow(2, 11); // must be a multiple of 2
 
         public Form1()
         {
@@ -37,13 +33,10 @@ namespace RecognizerUI
         public void StartListeningToMicrophone(int audioDeviceNumber = 0)
         {
             WaveIn wi = new WaveIn();
-            wi.DeviceNumber = audioDeviceNumber;
-            wi.WaveFormat = new NAudio.Wave.WaveFormat(RATE, 1);
-            wi.BufferMilliseconds = (int)((double)BUFFERSIZE / (double)RATE * 1000.0);
+            //wi.DeviceNumber = audioDeviceNumber;
+            //wi.WaveFormat = new NAudio.Wave.WaveFormat(RATE, 1);
+            //wi.BufferMilliseconds = (int)((double)BUFFERSIZE / (double)RATE * 1000.0);
             wi.DataAvailable += new EventHandler<WaveInEventArgs>(AudioDataAvailable);
-            bwp = new BufferedWaveProvider(wi.WaveFormat);
-            bwp.BufferLength = BUFFERSIZE * 2;
-            bwp.DiscardOnBufferOverflow = true;
             try
             {
                 wi.StartRecording();
@@ -65,8 +58,11 @@ namespace RecognizerUI
 
             //bwp.AddSamples(e.Buffer, 0, e.BytesRecorded);
             this.Text = $"length: {e.Buffer.Length}, b recorded: {e.BytesRecorded}, |{ticksDelta}";
-            label1.Text = $"[{ string.Join(", ", e.Buffer) }";
-            //label1.Text = $"[{ string.Join(", ", e.Buffer.Select(el => Math.Round((double)el * 100) / 100)) }";
+            var frequencies = ByteArrayToHz(e.Buffer).Where(el => el != 0).ToArray();
+            label1.Text = $"[{ string.Join(", ", frequencies) }]";
+
+            // this reduces flicker and helps keep the program responsive
+            Application.DoEvents();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -92,20 +88,26 @@ namespace RecognizerUI
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
-            timer1.Enabled = false;
-            PlotLatestData();
-            timer1.Enabled = true;
+            //
         }
-        public void PlotLatestData()
+        public double[] FFT(double[] data)
         {
-            // check the incoming microphone audio
-            int frameSize = BUFFERSIZE;
-            var audioBytes = new byte[frameSize];
-            bwp.Read(audioBytes, 0, frameSize);
+            var acceptedLength = (int)Math.Pow(2, Math.Floor(Math.Log2(data.Length)));
+            double[] fft = new double[acceptedLength];
+            var fftComplex = new System.Numerics.Complex[acceptedLength];
+            for (int i = 0; i < acceptedLength; i++)
+                fftComplex[i] = new System.Numerics.Complex(data[i], 0.0);
+            Accord.Math.FourierTransform.FFT(fftComplex, Accord.Math.FourierTransform.Direction.Forward);
+            for (int i = 0; i < acceptedLength; i++)
+                fft[i] = fftComplex[i].Magnitude;
+            return fft;
+        }
 
+        double[] ByteArrayToHz(byte[] bytes)
+        {
             // return if there's nothing new to plot
-            if (audioBytes.Length == 0)
-                return;
+            if (bytes.Length == 0)
+                return new double[] { };
             //if (audioBytes[frameSize - 2] == 0)
             //    return;
 
@@ -113,7 +115,7 @@ namespace RecognizerUI
             int BYTES_PER_POINT = 2;
 
             // create a (32-bit) int array ready to fill with the 16-bit data
-            int graphPointCount = audioBytes.Length / BYTES_PER_POINT;
+            int graphPointCount = bytes.Length / BYTES_PER_POINT;
 
             // create double arrays to hold the data we will graph
             double[] pcm = new double[graphPointCount];
@@ -124,7 +126,7 @@ namespace RecognizerUI
             for (int i = 0; i < graphPointCount; i++)
             {
                 // read the int16 from the two bytes
-                Int16 val = BitConverter.ToInt16(audioBytes, i * 2);
+                Int16 val = BitConverter.ToInt16(bytes, i * 2);
 
                 // store the value in Ys as a percent (+/- 100% = 200%)
                 pcm[i] = (double)(val) / Math.Pow(2, 16) * 200.0;
@@ -133,10 +135,7 @@ namespace RecognizerUI
             // calculate the full FFT
             fft = FFT(pcm);
 
-            // determine horizontal axis units for graphs
-            double pcmPointSpacingMs = RATE / 1000;
-            double fftMaxFreq = RATE / 2;
-            double fftPointSpacingHz = fftMaxFreq / graphPointCount;
+            // pcm - audio bytes, fft - (hope) frequency
 
             // just keep the real half (the other half imaginary)
             Array.Copy(fft, fftReal, fftReal.Length);
@@ -144,24 +143,7 @@ namespace RecognizerUI
             // Values are: pcm, fftReal
             // scottPlotUC1.PlotSignal(pcm, pcmPointSpacingMs, Color.Blue); scottPlotUC2.PlotSignal(fftReal, fftPointSpacingHz, Color.Blue);
 
-            label1.Text = $"[{ string.Join(", ", pcm.Select(el => Math.Round(el * 100) / 100)) }";
-            label2.Text = $"[{ string.Join(", ", fftReal.Select(el => Math.Round(el * 100) / 100)) }]";
-            //this.Text = $"pcm: {pcm.Length}, fft: {fftReal.Length}";
-
-            // this reduces flicker and helps keep the program responsive
-            Application.DoEvents();
-
-        }
-        public double[] FFT(double[] data)
-        {
-            double[] fft = new double[data.Length];
-            System.Numerics.Complex[] fftComplex = new System.Numerics.Complex[data.Length];
-            for (int i = 0; i < data.Length; i++)
-                fftComplex[i] = new System.Numerics.Complex(data[i], 0.0);
-            Accord.Math.FourierTransform.FFT(fftComplex, Accord.Math.FourierTransform.Direction.Forward);
-            for (int i = 0; i < data.Length; i++)
-                fft[i] = fftComplex[i].Magnitude;
-            return fft;
+            return fftReal.ToArray();
         }
     }
 }

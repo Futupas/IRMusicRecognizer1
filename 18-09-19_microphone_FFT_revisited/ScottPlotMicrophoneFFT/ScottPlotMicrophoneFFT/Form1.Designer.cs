@@ -54,33 +54,32 @@
             this.tableLayoutPanel1.Controls.Add(this.scottPlotUC2, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1216, 827);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(912, 672);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // scottPlotUC1
             // 
             this.scottPlotUC1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.scottPlotUC1.Location = new System.Drawing.Point(3, 2);
-            this.scottPlotUC1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.scottPlotUC1.Location = new System.Drawing.Point(2, 2);
+            this.scottPlotUC1.Margin = new System.Windows.Forms.Padding(2);
             this.scottPlotUC1.Name = "scottPlotUC1";
-            this.scottPlotUC1.Padding = new System.Windows.Forms.Padding(0, 25, 0, 0);
-            this.scottPlotUC1.Size = new System.Drawing.Size(1210, 409);
+            this.scottPlotUC1.Padding = new System.Windows.Forms.Padding(0, 20, 0, 0);
+            this.scottPlotUC1.Size = new System.Drawing.Size(908, 332);
             this.scottPlotUC1.TabIndex = 0;
             // 
             // scottPlotUC2
             // 
             this.scottPlotUC2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.scottPlotUC2.Location = new System.Drawing.Point(3, 415);
-            this.scottPlotUC2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.scottPlotUC2.Location = new System.Drawing.Point(2, 338);
+            this.scottPlotUC2.Margin = new System.Windows.Forms.Padding(2);
             this.scottPlotUC2.Name = "scottPlotUC2";
-            this.scottPlotUC2.Padding = new System.Windows.Forms.Padding(0, 0, 0, 25);
-            this.scottPlotUC2.Size = new System.Drawing.Size(1210, 410);
+            this.scottPlotUC2.Padding = new System.Windows.Forms.Padding(0, 0, 0, 20);
+            this.scottPlotUC2.Size = new System.Drawing.Size(908, 332);
             this.scottPlotUC2.TabIndex = 1;
             // 
             // timerReplot
@@ -90,13 +89,11 @@
             // 
             // statusStrip1
             // 
-            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblStatus});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 803);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 650);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1216, 24);
+            this.statusStrip1.Size = new System.Drawing.Size(912, 22);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -104,34 +101,32 @@
             // 
             this.lblStatus.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(176, 18);
+            this.lblStatus.Size = new System.Drawing.Size(154, 17);
             this.lblStatus.Text = "toolStripStatusLabel1";
             // 
             // menuStrip1
             // 
-            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.viewToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1216, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(912, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
-            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
             // viewToolStripMenuItem
             // 
             this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.autoScaleToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.viewToolStripMenuItem.Text = "View";
             // 
             // autoScaleToolStripMenuItem
             // 
             this.autoScaleToolStripMenuItem.Name = "autoScaleToolStripMenuItem";
-            this.autoScaleToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.autoScaleToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.autoScaleToolStripMenuItem.Text = "Auto-Scale";
             this.autoScaleToolStripMenuItem.Click += new System.EventHandler(this.autoScaleToolStripMenuItem_Click);
             // 
@@ -141,33 +136,32 @@
             this.websiteToolStripMenuItem,
             this.infoMessageToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
             // 
             // websiteToolStripMenuItem
             // 
             this.websiteToolStripMenuItem.Name = "websiteToolStripMenuItem";
-            this.websiteToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.websiteToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.websiteToolStripMenuItem.Text = "Website";
             this.websiteToolStripMenuItem.Click += new System.EventHandler(this.websiteToolStripMenuItem_Click);
             // 
             // infoMessageToolStripMenuItem
             // 
             this.infoMessageToolStripMenuItem.Name = "infoMessageToolStripMenuItem";
-            this.infoMessageToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.infoMessageToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.infoMessageToolStripMenuItem.Text = "Info Message";
             this.infoMessageToolStripMenuItem.Click += new System.EventHandler(this.infoMessageToolStripMenuItem_Click);
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1216, 827);
+            this.ClientSize = new System.Drawing.Size(912, 672);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.tableLayoutPanel1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Form1";
             this.Text = "ScottPlot Microphone FFT Demo";
             this.Load += new System.EventHandler(this.Form1_Load);
