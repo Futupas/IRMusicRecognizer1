@@ -22,8 +22,4 @@
     <PackageReference Include="System.Speech" Version="6.0.0-preview.1.21102.12" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\MusicRecognizer\MusicRecognizer.csproj" />
-  </ItemGroup>
-
 </Project>
