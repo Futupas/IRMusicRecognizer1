@@ -35,6 +35,7 @@ namespace SimpleMelodyRecognizer
         {
             this.Text = "Form1";
             this._recording = false;
+            this._record.RemoveFirst();
             var similarSongs = Recognizer.Search(this._record);
             MessageBox.Show($"Top {Recognizer.TOP_SONGS_COUNT} similar songs: \r\n" +
                 string.Join("\r\n", similarSongs.Select(

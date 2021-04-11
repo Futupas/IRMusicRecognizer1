@@ -8,7 +8,6 @@ namespace SimpleMelodyRecognizer.UI
     class PianoButton: Button
     {
         public const int BEEP_DURATION = 500; // ms
-        public readonly Color ACTIVE_COLOR = Color.LightGreen;
 
         public int Note { get; init; }
         public bool IsBlack { get; init; }
@@ -43,12 +42,6 @@ namespace SimpleMelodyRecognizer.UI
                     this._Form._record.Count < 1 ? this.Note : this.Note - lastNote);
                 this._Form.Text = "Record: " + string.Join(", ", this._Form._record);
             }
-            new Thread(() =>
-            {
-                this.BackColor = ACTIVE_COLOR;
-                Thread.Sleep(BEEP_DURATION);
-                this.BackColor = this.IsBlack ? Color.Black : Color.White;
-            }).Start();
             Console.Beep((int)PianoKeyboard.CalculateFrequencyOfNote(this.Note), BEEP_DURATION);
         }
         

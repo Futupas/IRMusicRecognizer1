@@ -31,8 +31,7 @@ namespace SimpleMelodyRecognizer
         }
 
         /// <summary>array1.Count() must be equal to array2.Count()</summary>
-        static uint Compare2Arrays<T>(IEnumerable<T> array1, IEnumerable<T> array2)
-            where T: IComparable<T>
+        static uint Compare2Arrays(IEnumerable<int> array1, IEnumerable<int> array2)
         {
             if (array1 == null || array2 == null) throw new ArgumentNullException();
             if (array1.Count() != array2.Count()) throw new ArgumentException("Length must be equal");
@@ -48,8 +47,8 @@ namespace SimpleMelodyRecognizer
 
                 var value1 = enumerator1.Current;
                 var value2 = enumerator2.Current;
-                var compare = value1.CompareTo(value2);
-                result += (uint)Math.Abs(compare);
+                var diff = Math.Abs(value1 - value2);
+                result += (uint)diff;
             }
 
             return result;
