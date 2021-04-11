@@ -7,14 +7,12 @@ namespace SimpleMelodyRecognizer.UI
     {
         const int BUTTON_HEIGHT = 200;
         const int BUTTON_WIDTH = 50;
-        //const int BLACK_BUTTON_WIDTH = 50;
         const int X = 10;
         const int Y = 200;
 
         PianoButton[] buttons;
-        public SortedDictionary<int, PianoButton> NotePianoMap { get; protected set; } = new();
-
         Form1 _Form;
+        public SortedDictionary<int, PianoButton> NotePianoMap { get; protected set; } = new();
 
 
         /// <param name="start">Included</param>
@@ -34,6 +32,24 @@ namespace SimpleMelodyRecognizer.UI
                 this.buttons[i] = new(x, y, BUTTON_WIDTH, BUTTON_HEIGHT, currentNote, black, form);
                 NotePianoMap.Add(currentNote, this.buttons[i]);
                 this._Form.Controls.Add(this.buttons[i]);
+            }
+        }
+        public static double CalculateFrequencyOfNote(int note, int start = 0)
+        {
+            note += start;
+            const double A3Frequency = 440.0;
+            double sqrt12_2 = Math.Pow(2.0, 1.0 / 12);
+            if (note > 0)
+            {
+                return A3Frequency * Math.Pow(sqrt12_2, note);
+            }
+            else if (note < 0)
+            {
+                return A3Frequency / Math.Pow(sqrt12_2, -note);
+            }
+            else
+            {
+                return A3Frequency;
             }
         }
 
@@ -57,24 +73,6 @@ namespace SimpleMelodyRecognizer.UI
                     return true;
             }
             throw new ($"Cannot detect piano button's color: note={note}");
-        }
-        public static double CalculateFrequencyOfNote(int note, int start = 0)
-        {
-            note += start;
-            const double A3Frequency = 440.0;
-            double sqrt12_2 = Math.Pow(2.0, 1.0 / 12);
-            if (note > 0)
-            {
-                return A3Frequency * Math.Pow(sqrt12_2, note);
-            }
-            else if (note < 0)
-            {
-                return A3Frequency / Math.Pow(sqrt12_2, -note);
-            }
-            else
-            {
-                return A3Frequency;
-            }
         }
 
     }

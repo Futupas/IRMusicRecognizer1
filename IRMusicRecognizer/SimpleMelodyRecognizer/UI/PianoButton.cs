@@ -6,14 +6,14 @@ namespace SimpleMelodyRecognizer.UI
 {
     class PianoButton: Button
     {
+        public const int BEEP_DURATION = 500; // ms
+        public readonly Color ACTIVE_COLOR = Color.LightGreen;
+
         public int Note { get; init; }
         public bool IsBlack { get; init; }
-        public readonly Color ACTIVE_COLOR = Color.LightGreen;
-        protected readonly Form1 _Form;
-
         public bool IsPlaying { get; protected set; } = false;
 
-        public const int BEEP_DURATION = 500; // ms
+        protected readonly Form1 _Form;
 
         public PianoButton(int x, int y, int width, int height, int note, bool isBlack, Form1 form): base()
         {
@@ -29,12 +29,6 @@ namespace SimpleMelodyRecognizer.UI
 
             this.MouseClick += PianoButton_MouseClick;
         }
-
-        private void PianoButton_MouseClick(object sender, MouseEventArgs e)
-        {
-            this.Play();
-        }
-
         public void Play()
         {
             if (this._Form._recording)
@@ -49,6 +43,11 @@ namespace SimpleMelodyRecognizer.UI
                 this._Form.Text = "Record: " + string.Join(", ", this._Form._record);
             }
             Console.Beep((int)PianoKeyboard.CalculateFrequencyOfNote(this.Note), BEEP_DURATION);
+        }
+        
+        private void PianoButton_MouseClick(object sender, MouseEventArgs e)
+        {
+            this.Play();
         }
     }
 }

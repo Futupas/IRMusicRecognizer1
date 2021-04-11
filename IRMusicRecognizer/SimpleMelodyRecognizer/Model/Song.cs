@@ -3,9 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace SimpleMelodyRecognizer
 {
@@ -29,8 +27,21 @@ namespace SimpleMelodyRecognizer
                 return realNotes;
             }
         }
+        public int[] RealNotesNoRepeats
+        {
+            get
+            {
+                var result = new LinkedList<int>();
+                result.AddLast(this.StartNote ?? 0);
+                foreach (var note in this.RealNotes)
+                {
+                    if (note != result.Last()) result.AddLast(note);
+                }
+                return result.ToArray();
+            }
+        }
 
-        public async void Play(SortedDictionary<int, PianoButton> notePianoMap)
+        public void Play(SortedDictionary<int, PianoButton> notePianoMap)
         {
             foreach (var note in this.RealNotes)
             {
