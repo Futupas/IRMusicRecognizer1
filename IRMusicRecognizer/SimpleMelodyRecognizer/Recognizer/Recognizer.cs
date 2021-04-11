@@ -14,7 +14,7 @@ namespace SimpleMelodyRecognizer
             new() { Name = "В траве сидел кузнечик", StartNote = 0, 
                 NoteDeltas = { } },
             new() { Name = "Державний гімн України", StartNote = 19, 
-                NoteDeltas = new int[] { 0, 0, -2, 2, 1, 2, -2, -1, -2, -2, 4, -5, 5, -7, -1, 1, 2, 1, 2, 1, 2, 2, 0, 0, -2, 2, 1, 2, -2, -1, -2, -3, 7, -7, 1, 0 } },
+                NoteDeltas = new int[] { 0, 0, -2, 2, 1, 2, -2, -1, -2, -2, 4, -5, 5, -7, -1, 1, 2, 1, 2, 2, 0, 0, -2, 2, 1, 2, -2, -1, -2, -2, -3, 7, -8, 1, 0 } },
             new() { Name = "Всё идёт по плану", StartNote = 0, 
                 NoteDeltas = { } },
             new() { Name = "Wind of Change", StartNote = 0, 

@@ -1,7 +1,10 @@
-﻿using System;
+﻿using SimpleMelodyRecognizer.UI;
+using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SimpleMelodyRecognizer
@@ -24,6 +27,25 @@ namespace SimpleMelodyRecognizer
                     realNotes[i] = realNotes[i - 1] + this.NoteDeltas[i - 1];
                 }
                 return realNotes;
+            }
+        }
+
+        public async void Play(SortedDictionary<int, PianoButton> notePianoMap)
+        {
+            foreach (var note in this.RealNotes)
+            {
+                PianoButton noteBtn;
+                if (notePianoMap == null || !notePianoMap.TryGetValue(note, out noteBtn))
+                {
+                    Console.Beep((int)PianoKeyboard.CalculateFrequencyOfNote(note), PianoButton.BEEP_DURATION);
+                }
+                else
+                {
+                    noteBtn.Play();
+                }
+                Application.DoEvents();
+                Thread.Sleep(PianoButton.BEEP_DURATION);
+                Application.DoEvents();
             }
         }
     }

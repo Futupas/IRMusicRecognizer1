@@ -18,7 +18,7 @@ namespace SimpleMelodyRecognizer.UI
 
         public bool IsPlaying { get; protected set; } = false;
 
-        public const int BEEP_DURATION = 200; // ms
+        public const int BEEP_DURATION = 500; // ms
 
         public PianoButton(int x, int y, int width, int height, int note, bool isBlack, Form1 form): base()
         {
@@ -32,42 +32,28 @@ namespace SimpleMelodyRecognizer.UI
             this.Height = height;
             this.Location = new Point(x, y);
 
-            this.MouseDown += PianoButton_MouseDown;
-            this.MouseUp += PianoButton_MouseUp;
+            this.MouseClick += PianoButton_MouseClick;
         }
 
-        private void PianoButton_MouseUp(object sender, MouseEventArgs e)
+        private void PianoButton_MouseClick(object sender, MouseEventArgs e)
         {
-            this.StopPlaying();
+            this.Play();
         }
 
-        private void PianoButton_MouseDown(object sender, MouseEventArgs e)
+        public void Play()
         {
             if (this._Form._recording)
             {
-                this._Form._record.AddLast(this.Note);
+                int lastNote = 0;
+                foreach (var recNote in this._Form._record)
+                {
+                    lastNote += recNote;
+                }
+                this._Form._record.AddLast(
+                    this._Form._record.Count < 1 ? this.Note : this.Note - lastNote);
                 this._Form.Text = string.Join(", ", this._Form._record);
             }
-            this.StartPlaying();
-        }
-
-        public void StartPlaying()
-        {
-            this.IsPlaying = true;
-            //new Thread(() => {
-                Console.Beep((int)PianoKeyboard.CalculateFrequencyOfNote(this.Note), BEEP_DURATION);
-            //}).Start();
-            this.BackColor = ACTIVE_COLOR;
-        }
-        public void StopPlaying()
-        {
-            this.IsPlaying = false;
-            this.BackColor = this.IsBlack ? Color.Black : Color.White;
-        }
-        public void Play()
-        {
-            this.StartPlaying();
-            this.StopPlaying();
+            Console.Beep((int)PianoKeyboard.CalculateFrequencyOfNote(this.Note), BEEP_DURATION);
         }
     }
 }

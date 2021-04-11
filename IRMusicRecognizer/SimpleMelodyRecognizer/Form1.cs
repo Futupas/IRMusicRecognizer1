@@ -22,12 +22,12 @@ namespace SimpleMelodyRecognizer
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Keyboard = new(3, 28, this);
+            Keyboard = new(0, 37, this);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Keyboard.PlaySong(Recognizer.Dataset[2]);
+            Recognizer.Dataset[2].Play(this.Keyboard.NotePianoMap);
         }
 
         public bool _recording = false;

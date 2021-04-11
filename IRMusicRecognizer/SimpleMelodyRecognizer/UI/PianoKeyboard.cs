@@ -15,7 +15,7 @@ namespace SimpleMelodyRecognizer.UI
         const int Y = 200;
 
         PianoButton[] buttons;
-        SortedDictionary<int, PianoButton> notePianoMap = new();
+        public SortedDictionary<int, PianoButton> NotePianoMap { get; protected set; } = new();
 
         Form1 _Form;
 
@@ -35,38 +35,11 @@ namespace SimpleMelodyRecognizer.UI
                 int y = black ? Y : Y + BUTTON_HEIGHT;
                 int x = X + i * BUTTON_WIDTH;
                 this.buttons[i] = new(x, y, BUTTON_WIDTH, BUTTON_HEIGHT, currentNote, black, form);
-                notePianoMap.Add(currentNote, this.buttons[i]);
+                NotePianoMap.Add(currentNote, this.buttons[i]);
                 this._Form.Controls.Add(this.buttons[i]);
             }
         }
 
-        public void PlaySong(Song song)
-        {
-            if (song == null) throw new ArgumentNullException("Song is null");
-
-            
-            foreach (var note in song.RealNotes)
-            {
-                PianoButton noteBtn;
-                if (!notePianoMap.TryGetValue(note, out noteBtn))
-                {
-                    Console.Beep((int)CalculateFrequencyOfNote(note), PianoButton.BEEP_DURATION);
-                }
-                else
-                {
-                    noteBtn.Play();
-                }
-            }
-        }
-
-        public void Draw()
-        {
-            //
-        }
-        //private static int CalculateNoteX(int startNote, int note)
-        //{
-        //    bool black = IsButtonBlack(note);
-        //}
         private static bool IsButtonBlack(int note)
         {
             switch (note % 12)
