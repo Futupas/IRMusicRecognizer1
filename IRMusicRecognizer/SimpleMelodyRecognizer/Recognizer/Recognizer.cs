@@ -19,10 +19,10 @@ namespace SimpleMelodyRecognizer
                 NoteDeltas = new[] { -5, 5, -5, 5, -1, 0, 0, -4, 4, -4, 4, 1, 0 } },
             new() { Name = "Державний гімн України", StartNote = 19, 
                 NoteDeltas = new[] { 0, 0, -2, 2, 1, 2, -2, -1, -2, -2, 4, -5, 5, -7, -1, 1, 2, 1, 2, 2, 0, 0, -2, 2, 1, 2, -2, -1, -2, -2, -3, 7, -8, 1, 0 } },
-            //new() { Name = "Всё идёт по плану", StartNote = 0, 
-            //    NoteDeltas = { } },
-            //new() { Name = "Wind of Change", StartNote = 0, 
-            //    NoteDeltas = { } },
+            new() { Name = "Всё идёт по плану", StartNote = 14,
+                NoteDeltas = new[] { 1, -1, -2, -5, 5, 2, 1, -1, -2, -5, 5, 2, 1, -1, -2, -5, 5, 2, 1, -1, -2, -5, 5, 2 } },
+            new() { Name = "Wind of Change", StartNote = 12,
+                NoteDeltas = new[] { 2, 1, -3, 2, 1, 2, -2, -3, 2, 1, -3, 2, 1, 2, -2, 0, 2, 2, 1, -1, -4, 2, -5, 3, -1 } },
         };
 
 
