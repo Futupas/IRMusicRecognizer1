@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace SimpleMelodyRecognizer.UI
@@ -51,7 +46,7 @@ namespace SimpleMelodyRecognizer.UI
                 }
                 this._Form._record.AddLast(
                     this._Form._record.Count < 1 ? this.Note : this.Note - lastNote);
-                this._Form.Text = string.Join(", ", this._Form._record);
+                this._Form.Text = "Record: " + string.Join(", ", this._Form._record);
             }
             Console.Beep((int)PianoKeyboard.CalculateFrequencyOfNote(this.Note), BEEP_DURATION);
         }

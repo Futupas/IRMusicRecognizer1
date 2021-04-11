@@ -36,7 +36,7 @@ namespace SimpleMelodyRecognizer
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 12);
+            this.button1.Location = new System.Drawing.Point(244, 12);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(142, 29);
             this.button1.TabIndex = 0;
@@ -46,7 +46,7 @@ namespace SimpleMelodyRecognizer
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(20, 47);
+            this.button2.Location = new System.Drawing.Point(12, 12);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(178, 29);
             this.button2.TabIndex = 1;
@@ -56,7 +56,7 @@ namespace SimpleMelodyRecognizer
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(20, 83);
+            this.button3.Location = new System.Drawing.Point(12, 47);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(178, 29);
             this.button3.TabIndex = 2;

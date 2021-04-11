@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using SimpleMelodyRecognizer.UI;
 
@@ -39,18 +34,21 @@ namespace SimpleMelodyRecognizer
         }
         protected int[] GetRecord()
         {
+            this.Text = "Form1";
             this._recording = false;
             return _record.ToArray();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            this.Text = "Record: ";
             this.StartRecording();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            this.GetRecord();
+            var record = this.GetRecord();
+            MessageBox.Show($"[{string.Join(", ", record)}]");
         }
     }
 }
