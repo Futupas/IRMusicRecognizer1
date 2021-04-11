@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace SimpleMelodyRecognizer.UI
@@ -42,6 +43,12 @@ namespace SimpleMelodyRecognizer.UI
                     this._Form._record.Count < 1 ? this.Note : this.Note - lastNote);
                 this._Form.Text = "Record: " + string.Join(", ", this._Form._record);
             }
+            new Thread(() =>
+            {
+                this.BackColor = ACTIVE_COLOR;
+                Thread.Sleep(BEEP_DURATION);
+                this.BackColor = this.IsBlack ? Color.Black : Color.White;
+            }).Start();
             Console.Beep((int)PianoKeyboard.CalculateFrequencyOfNote(this.Note), BEEP_DURATION);
         }
         

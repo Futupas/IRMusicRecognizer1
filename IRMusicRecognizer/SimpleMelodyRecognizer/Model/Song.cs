@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace SimpleMelodyRecognizer
 {
@@ -54,8 +55,8 @@ namespace SimpleMelodyRecognizer
                 {
                     noteBtn.Play();
                 }
-                Application.DoEvents();
-                Thread.Sleep(PianoButton.BEEP_DURATION);
+                //Application.DoEvents();
+                //Thread.Sleep(PianoButton.BEEP_DURATION);
                 Application.DoEvents();
             }
         }

@@ -8,7 +8,7 @@ namespace SimpleMelodyRecognizer
     static class Recognizer
     {
         /// <summary>If delta between songs is more, than this value, it will be 0. Also used for calculating percentage of overlaping</summary>
-        public const uint ZERO_PERCENT_DIFFERENCE = 100;
+        public const uint ZERO_PERCENT_DIFFERENCE = 20;
         public const int TOP_SONGS_COUNT = 3;
 
 
